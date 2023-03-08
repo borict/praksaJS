@@ -1,7 +1,0 @@
-[3/8/2023 12:38:30 PM] Kreiran je doktor:  Milan Bajic, specijalizalizacija:  kardiolog.
-[3/8/2023 12:38:30 PM] Kreiran je pacijent:  Dragan Kojic, jmbg: 1234567891234, broj kartona: 12345678912.
-[3/8/2023 12:38:30 PM] Doktor Milan Bajic je izabran doktor za pacijenta  Dragan Kojic.
-[3/8/2023 12:38:30 PM] Zakazan pregled Nivo secera u krvi za pacijenta: Dragan Kojic, termin je: 09.03.2023 15:00.
-[3/8/2023 12:38:30 PM] Pacijent Dragan Kojic obavlja pregled Nivo secera u krvi i rezultat je 7.
-[3/8/2023 12:38:30 PM] Zakazan pregled Krvni pritisak za pacijenta: Dragan Kojic, termin je: 09.03.2023 15:00.
-[3/8/2023 12:38:30 PM] Pacijent Dragan Kojic obavlja pregled Krvni pritisak i rezultat je 140/90, puls je: 85.

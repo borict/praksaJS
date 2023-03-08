@@ -6,13 +6,13 @@ class Doktor {
     this.prezime = prezime;
     this.specijalizacija = specijalizacija;
     this.pacijenti = [];
+    logAction(
+      `Kreiran je doktor:  ${this.ime} ${this.prezime}, specijalizalizacija:  ${this.specijalizacija}.`
+    );
   }
   zakaziPregled(pacijent, tipTesta, datumTesta) {
     let labPregled = new LabPregled(tipTesta, datumTesta);
     pacijent.labPregledi.push(labPregled);
-    console.log(
-      `Zakazan pregled ${tipTesta.tip} za pacijenta: ${pacijent.ime} ${pacijent.prezime}, termin je: ${datumTesta}.`
-    );
     logAction(
       `Zakazan pregled ${tipTesta.tip} za pacijenta: ${pacijent.ime} ${pacijent.prezime}, termin je: ${datumTesta}.`
     );
@@ -26,22 +26,19 @@ class Pacijent {
     this.brojKartona = brojKartona;
     this.doktor = null;
     this.labPregledi = [];
+    logAction(
+      `Kreiran je pacijent:  ${this.ime} ${this.prezime}, jmbg: ${this.jmbg}, broj kartona: ${this.brojKartona}.`
+    );
   }
   izaberiDoktora(pacijent, doktor) {
     this.doktor = doktor;
     doktor.pacijenti.push(pacijent);
-    console.log(
-      `Doktor ${doktor.ime} ${doktor.prezime} je izabran doktor za pacijenta  ${this.ime} ${this.prezime}.`
-    );
     logAction(
       `Doktor ${doktor.ime} ${doktor.prezime} je izabran doktor za pacijenta  ${this.ime} ${this.prezime}.`
     );
   }
 
   obaviPregled(tipPregleda, rezultat) {
-    console.log(
-      `Pacijent ${this.ime} ${this.prezime} obavlja pregled ${tipPregleda} i rezultat je ${rezultat}.`
-    );
     logAction(
       `Pacijent ${this.ime} ${this.prezime} obavlja pregled ${tipPregleda} i rezultat je ${rezultat}.`
     );
@@ -80,22 +77,13 @@ class NivoHolesterolaUKrvi extends LabPregled {
 }
 
 function logAction(action) {
-  const now = new Date();
-  const timestamp = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-  fs.appendFileSync("tp.txt", `[${timestamp}] ${action}\n`);
+  const datum = new Date();
+  const vreme = `${datum.toLocaleDateString()} ${datum.toLocaleTimeString()}`;
+  fs.appendFileSync("logAction.txt", `[${vreme}] ${action}\n`);
 }
 
 const milan = new Doktor("Milan", "Bajic", "kardiolog");
-console.log(`Kreiran je doktor ${milan.ime} ${milan.prezime}`);
-logAction(
-  `Kreiran je doktor:  ${milan.ime} ${milan.prezime}, specijalizalizacija:  ${milan.specijalizacija}.`
-);
-
 const dragan = new Pacijent("Dragan", "Kojic", 1234567891234, 12345678912);
-console.log(`Kreiran je pacijent ${dragan.ime} ${dragan.prezime}`);
-logAction(
-  `Kreiran je pacijent:  ${dragan.ime} ${dragan.prezime}, jmbg: ${dragan.jmbg}, broj kartona: ${dragan.brojKartona}.`
-);
 
 const datum1 = "08.03.2023 09:00";
 const datum2 = "09.03.2023 15:00";
