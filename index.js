@@ -10,11 +10,16 @@ class Doktor {
       `Kreiran je doktor:  ${this.ime} ${this.prezime}, specijalizalizacija:  ${this.specijalizacija}.`
     );
   }
-  zakaziPregled(pacijent, tipTesta, datumTesta) {
-    let labPregled = new LabPregled(tipTesta, datumTesta);
-    pacijent.labPregledi.push(labPregled);
+  zakaziPregled(pacijent, test, datumTesta) {
+    pacijent.labPregledi.push(test);
     logAction(
-      `Zakazan pregled ${tipTesta.tip} za pacijenta: ${pacijent.ime} ${pacijent.prezime}, termin je: ${datumTesta}.`
+      `Zakazan pregled ${test.tip} za pacijenta: ${pacijent.ime} ${pacijent.prezime}, termin je: ${datumTesta}.`
+    );
+  }
+  dodajPacijenta(pacijent) {
+    this.pacijenti.push(pacijent);
+    logAction(
+      `Pacijent ${pacijent.ime} ${pacijent.prezime} je dodat kod doktora ${this.ime}a ${this.prezime}a.`
     );
   }
 }
@@ -30,9 +35,10 @@ class Pacijent {
       `Kreiran je pacijent:  ${this.ime} ${this.prezime}, jmbg: ${this.jmbg}, broj kartona: ${this.brojKartona}.`
     );
   }
-  izaberiDoktora(pacijent, doktor) {
+
+  izaberiDoktora(doktor) {
     this.doktor = doktor;
-    doktor.pacijenti.push(pacijent);
+    doktor.pacijenti.push(this);
     logAction(
       `Doktor ${doktor.ime} ${doktor.prezime} je izabran doktor za pacijenta  ${this.ime} ${this.prezime}.`
     );
@@ -104,7 +110,8 @@ const nivoSeceraUKrvi = new NivoSeceraUKrvi(
   poslednjiObrok
 );
 
-dragan.izaberiDoktora(dragan, milan);
+dragan.izaberiDoktora(milan);
+milan.dodajPacijenta(dragan);
 
 milan.zakaziPregled(dragan, nivoSeceraUKrvi, nivoSeceraUKrvi.datum);
 dragan.obaviPregled(nivoSeceraUKrvi.tip, nivoSeceraUKrvi.rezultat);
